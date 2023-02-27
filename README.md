@@ -8,4 +8,5 @@ https://www.notion.so/Notice-Board-with-Java-Spring-FrameWork-927540ab537a4bc986
 # 만약 이 프로젝트로 진행하신다면!
 oracle db를 활용해서 제작하였기 때문에 설정을 모르신다면 oracle db를 사용해주세요.
 
-설치를 다 하셨다면 sqlplus에 테이블을 
+설치를 다 하셨다면 sqlplus에 테이블을 추가하게 됩니다.
+테이블 추가 문은 개발이 끝나고 올리도록 할게요
