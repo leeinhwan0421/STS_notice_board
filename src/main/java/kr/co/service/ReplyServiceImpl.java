@@ -38,4 +38,9 @@ public class ReplyServiceImpl implements ReplyService{
 	public ReplyVO selectReply(int rno) throws Exception {
 		return dao.selectReply(rno);
 	}
+
+	@Override
+	public int replyListCount(int bno) throws Exception {
+		return dao.replyListCount(bno);
+	}
 }

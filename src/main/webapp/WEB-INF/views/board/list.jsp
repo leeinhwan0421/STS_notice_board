@@ -54,6 +54,15 @@
 		width: 10%;
 	}
 	
+	.replyCount, .role_Text{
+		color: red;
+		font-weight: 700;
+	}
+	
+	.file_Image{
+		margin-bottom: -6px;
+	}
+	
 	.pagination{
 	
 	}
@@ -140,9 +149,20 @@
 							<tr class = "table_items">
 								<td><c:out value="${list.bno}" /></td>
 								<td>
-									<a href="/board/readView?bno=${list.bno}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}"><c:out value="${list.title}" /></a>
+									<a href="/board/readView?bno=${list.bno}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}">
+									<c:out value="${list.title}"/>
+									</a>
+									<span class="replyCount"> [${controller.getReplyCount(list.bno)}] </span>
+									<c:if test = "${controller.getHasFile(list) == true}">
+										<img class="file_Image" src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F18c17374-7195-44c7-9817-5a244c460326%2F4856668.png?table=block&id=5c837d47-7778-4ff4-ba2f-543b5dea6018&spaceId=2b7cc640-ccde-444e-b34a-e4adcd1367c6&width=2000&userId=916f94dc-5593-4f96-af20-76df5f60b522&cache=v2" width="24" height="24">
+									</c:if>
 								</td>
-								<td><c:out value="${list.writer}" /></td>
+								<td>
+									<c:out value="${list.writer}" />
+									<c:if test= "${controller.getWriterRole(list.writer) == 'MANAGER'}">
+										<span class="role_Text">[관리자]</span>
+									</c:if>
+								</td>
 								<td><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd"/></td>
 								<td><c:out value="${list.hit}" /></td>
 							</tr>

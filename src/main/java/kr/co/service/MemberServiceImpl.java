@@ -1,5 +1,7 @@
 package kr.co.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -45,5 +47,19 @@ public class MemberServiceImpl implements MemberService {
 		int result = dao.idChk(vo);
 		return result;
 	}
-	
+
+	@Override
+	public List<MemberVO> list() throws Exception {
+		return dao.list();
+	}
+
+	@Override
+	public void memberUpgrade(MemberVO vo) throws Exception {
+		dao.memberUpgrade(vo);
+	}
+
+	@Override
+	public MemberVO memberChk(String userId) throws Exception {
+		return dao.memberChk(userId);
+	}
 }

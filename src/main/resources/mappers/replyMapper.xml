@@ -48,5 +48,10 @@
 		  FROM MP_REPLY
 		 WHERE RNO = #{rno}
 	</select>
-
+	
+	<!-- 게시글의 댓글 갯수 확인하기!!! -->
+	<select id="replyListCount" resultType="int">
+		select COUNT(*) 
+		FROM MP_REPLY WHERE BNO = #{bno}
+	</select>
 </mapper>

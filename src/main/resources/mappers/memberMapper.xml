@@ -50,4 +50,27 @@
 		SELECT COUNT(*) FROM MP_MEMBER
 		WHERE USERID = #{userId}
 	</select>
+	
+	<!-- 멤버 목록 -->
+	<select id="list" resultType="kr.co.vo.MemberVO"> 
+		SELECT USERID,
+		       USERNAME,
+		       REGDATE,
+		       ROLE
+		FROM MP_MEMBER
+		ORDER BY ROLE ASC
+	</select>
+	
+	<!-- 멤버 권한 상승 -->
+	<update id="memberUpgrade" parameterType="kr.co.vo.MemberVO">
+		UPDATE MP_MEMBER SET ROLE = #{role}
+		WHERE USERID = #{userId}
+	</update>
+	
+	<!-- 멤버 조회 -->
+	<select id="memberChk" resultType="kr.co.vo.MemberVO">
+		SELECT * 
+		FROM MP_MEMBER 
+		WHERE userID = #{userId}
+	</select>
 </mapper>

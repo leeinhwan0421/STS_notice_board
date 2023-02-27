@@ -38,4 +38,9 @@ public class ReplyDAOImpl implements ReplyDAO {
 	public ReplyVO selectReply(int rno) throws Exception {
 		return sql.selectOne("replyMapper.selectReply", rno);
 	}
+
+	@Override
+	public int replyListCount(int bno) throws Exception {
+		return sql.selectOne("replyMapper.replyListCount", bno);
+	}
 }

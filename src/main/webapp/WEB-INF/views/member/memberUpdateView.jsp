@@ -158,7 +158,7 @@
 						<p class="mainText"> ${member.userId}님의 수정창 </p>
 						
 						<p class="spaceMaker"></p> 
-						<p>	<input type="password" id="userPass" name="userPass" placeholder="new Password" /> </p>
+						<p>	<input type="password" id="userPass" name="userPass" placeholder="Your Password" /> </p>
 						<p>	<input type="text" id="userName" name="userName" placeholder="new Name"/> </p>				
 					</form>
 						<p class="spaceMaker"></p>

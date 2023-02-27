@@ -205,10 +205,18 @@
 					<textarea rows="3" id="content" name="content" class="content" readonly="readonly"><c:out value="${read.content}" /></textarea>
 					
 					<div class="buttongroup">
-						<c:if test="${member.userId == read.writer}">
-							<button type="button" class="update_btn">수정</button>
-							<button type="button" class="delete_btn">삭제</button>
-						</c:if>
+						<c:choose>
+							<c:when test="${member.userId != read.writer and member.role != 'MANAGER'}">
+								<!-- NONE -->
+							</c:when>
+							<c:when test="${member.userId == read.writer}">
+								<button type="button" class="update_btn">수정</button>
+								<button type="button" class="delete_btn">삭제</button>
+							</c:when>
+							<c:when test="${member.role == 'MANAGER'}">
+								<button type="button" class="delete_btn">삭제</button>
+							</c:when>
+						</c:choose>
 						<button type="button" class="list_btn">목록</button>	
 					</div>
 					
@@ -259,10 +267,18 @@
 									</p>
 									<span style="font-size: 12px; color: gray"><fmt:formatDate value="${replyList.regdate}" pattern="yyyy-MM-dd" /></span>
 									<div>
-										<c:if test="${member.userId == replyList.writer}">
-											<button type="button" class="replyUpdateBtn" data-rno="${replyList.rno}">수정</button>
-											<button type="button" class="replyDeleteBtn" data-rno="${replyList.rno}">삭제</button>
-										</c:if>
+										<c:choose>
+											<c:when test="${member.userId != replyList.writer and member.role != 'MANAGER'}">
+												<!-- NONE -->
+											</c:when>
+											<c:when test="${member.userId == replyList.writer}">
+												<button type="button" class="replyUpdateBtn">수정</button>
+												<button type="button" class="replyDeleteBtn">삭제</button>
+											</c:when>
+											<c:when test="${member.role == 'MANAGER'}">
+												<button type="button" class="replyUpdateBtn">삭제</button>
+											</c:when>
+										</c:choose>
 									</div>
 								</li>
 							</c:forEach>   

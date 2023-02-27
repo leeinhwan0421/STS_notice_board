@@ -1,5 +1,7 @@
 package kr.co.dao;
 
+import java.util.List;
+
 import kr.co.vo.MemberVO;
 
 public interface MemberDAO {
@@ -20,4 +22,13 @@ public interface MemberDAO {
 	
 	// ID 체크
 	public int idChk(MemberVO vo) throws Exception;
+	
+	// 멤버 리스트
+	public List<MemberVO> list() throws Exception;
+	
+	// 멤버 권한 상승
+	public void memberUpgrade(MemberVO vo) throws Exception;
+	
+	// 멤버 조회
+	public MemberVO memberChk(String userId) throws Exception;
 }

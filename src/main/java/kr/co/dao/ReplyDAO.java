@@ -19,4 +19,7 @@ public interface ReplyDAO {
 	
 	// 선택된 댓글 조회
 	public ReplyVO selectReply(int rno) throws Exception;
+	
+	// 게시글 댓글 수 확인
+	public int replyListCount(int bno) throws Exception;
 }

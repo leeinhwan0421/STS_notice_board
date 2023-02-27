@@ -3,14 +3,17 @@ package kr.co.controller;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import kr.co.service.MemberService;
 import kr.co.vo.MemberVO;
 
@@ -143,5 +146,31 @@ public class MemberController {
 	public int idChk(MemberVO vo) throws Exception {
 		int result = service.idChk(vo);
 		return result;
+	}
+	
+	// 멤버 관리 post
+	@RequestMapping(value="/memberManagementView", method = RequestMethod.GET)
+	public String memberManagementView(Model model) throws Exception{
+		logger.info("memberManagementView");
+		
+		model.addAttribute("list", service.list());
+		
+		return "member/memberManagementView";
+	}
+	
+	@RequestMapping(value="/memberManagementDelete", method = RequestMethod.POST)
+	public String memberManagementDelete(MemberVO vo) throws Exception{
+		
+		service.memberDelete(vo);
+		
+		return "member/memberManagementView";
+	}
+	
+	@RequestMapping(value="/memberUpgrade", method = RequestMethod.POST)
+	public String memberUpgrade(MemberVO vo) throws Exception{
+		
+		service.memberUpgrade(vo);
+		
+		return "member/memberManagementView";
 	}
 }

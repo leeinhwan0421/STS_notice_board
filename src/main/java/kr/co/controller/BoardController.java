@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.service.BoardService;
+import kr.co.service.MemberService;
 import kr.co.service.ReplyService;
 import kr.co.vo.BoardVO;
 import kr.co.vo.PageMaker;
@@ -37,6 +38,9 @@ public class BoardController {
 	
 	@Inject
 	ReplyService replyService;
+	
+	@Inject
+	MemberService memberService;
 	
 	// 게시판 글 작성 화면
 	@RequestMapping(value = "/board/writeView", method = RequestMethod.GET)
@@ -59,7 +63,8 @@ public class BoardController {
 		logger.info("list");
 			
 		model.addAttribute("list", service.list(scri));
-			
+		model.addAttribute("controller", this);
+		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(scri);
 		pageMaker.setTotalCount(service.listCount(scri));
@@ -68,6 +73,19 @@ public class BoardController {
 			
 		return "board/list";
 			
+	}
+	
+	public int getReplyCount(int bno) throws Exception {
+		return replyService.replyListCount(bno);
+	}
+	
+	public boolean getHasFile(BoardVO vo) throws Exception {
+		List<Map<String, Object>> fileList = service.selectFileList(vo.getBno());
+		return fileList.size() != 0;
+	}
+	
+	public String getWriterRole(String userId) throws Exception{
+		return memberService.memberChk(userId).getRole();
 	}
 	
 	// 게시판 조회
