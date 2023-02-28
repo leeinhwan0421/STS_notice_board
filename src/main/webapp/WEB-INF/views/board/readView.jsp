@@ -142,9 +142,17 @@
 			})
 			
 			$(".replyWriteBtn").on("click", function(){
-				var formObj = $("form[name='replyForm']");
-				formObj.attr("action", "/board/replyWrite");
-				formObj.submit();
+				var content = $('#content').val();
+				
+				if(content.trim() == "");
+				{
+					alert("공백만 입력하실 수 없습니다.");
+					return false;
+				}
+				
+			    var formObj = $("form[name='replyForm']");
+			    formObj.attr("action", "/board/replyWrite");
+			    formObj.submit();
 			});
 			
 			//댓글 수정 View
@@ -272,8 +280,8 @@
 												<!-- NONE -->
 											</c:when>
 											<c:when test="${member.userId == replyList.writer}">
-												<button type="button" class="replyUpdateBtn">수정</button>
-												<button type="button" class="replyDeleteBtn">삭제</button>
+												<button type="button" class="replyUpdateBtn" data-rno="${replyList.rno}">수정</button>
+												<button type="button" class="replyDeleteBtn" data-rno="${replyList.rno}">삭제</button>
 											</c:when>
 											<c:when test="${member.role == 'MANAGER'}">
 												<button type="button" class="replyUpdateBtn">삭제</button>

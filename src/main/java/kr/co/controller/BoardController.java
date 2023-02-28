@@ -72,7 +72,6 @@ public class BoardController {
 		model.addAttribute("pageMaker", pageMaker);
 			
 		return "board/list";
-			
 	}
 	
 	public int getReplyCount(int bno) throws Exception {
@@ -133,6 +132,7 @@ public class BoardController {
 		rttr.addAttribute("perPageNum", scri.getPerPageNum());
 		rttr.addAttribute("searchType", scri.getSearchType());
 		rttr.addAttribute("keyword", scri.getKeyword());
+		rttr.addAttribute("sort", scri.getSort());
 
 		return "redirect:/board/list";
 	}
@@ -148,6 +148,7 @@ public class BoardController {
 		rttr.addAttribute("perPageNum", scri.getPerPageNum());
 		rttr.addAttribute("searchType", scri.getSearchType());
 		rttr.addAttribute("keyword", scri.getKeyword());
+		rttr.addAttribute("sort", scri.getSort());
 			
 		return "redirect:/board/list";
 	}
@@ -164,6 +165,7 @@ public class BoardController {
 		rttr.addAttribute("perPageNum", scri.getPerPageNum());
 		rttr.addAttribute("searchType", scri.getSearchType());
 		rttr.addAttribute("keyword", scri.getKeyword());
+		rttr.addAttribute("sort", scri.getSort());
 		
 		return "redirect:/board/readView";
 	}
@@ -191,6 +193,7 @@ public class BoardController {
 		rttr.addAttribute("perPageNum", scri.getPerPageNum());
 		rttr.addAttribute("searchType", scri.getSearchType());
 		rttr.addAttribute("keyword", scri.getKeyword());
+		rttr.addAttribute("sort", scri.getSort());
 			
 		return "redirect:/board/readView";
 	}
@@ -219,6 +222,7 @@ public class BoardController {
 		rttr.addAttribute("perPageNum", scri.getPerPageNum());
 		rttr.addAttribute("searchType", scri.getSearchType());
 		rttr.addAttribute("keyword", scri.getKeyword());
+		rttr.addAttribute("sort", scri.getSort());
 			
 		return "redirect:/board/readView";
 	}

@@ -33,13 +33,13 @@
 		               WRITER, 
 		               REGDATE,
 		               HIT, 
-		               ROW_NUMBER() OVER(ORDER BY BNO DESC) AS RNUM
+		               ROW_NUMBER() OVER(<include refid="sort" />) AS RNUM
 		         FROM MP_BOARD
 		         WHERE 1=1 
 		         	<include refid="search"></include>
 		                       ) MP
 		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
-		ORDER BY BNO DESC
+		<include refid="sort" />
 	</select>
 	
 	<select id="listCount" parameterType="kr.co.vo.SearchCriteria" resultType="int">
@@ -49,6 +49,18 @@
 		<include refid="search"></include>	
 		   AND BNO > 0
 	</select>
+	
+	<sql id="sort">
+		<if test="sort == null">
+			ORDER BY BNO DESC
+		</if>
+		<if test="sort == 'bno'">
+			ORDER BY BNO DESC
+		</if>
+		<if test="sort == 'viewCount'">
+			ORDER BY HIT DESC
+		</if>
+	</sql>
 	
 	<sql id="search">
 		<if test="searchType != null">

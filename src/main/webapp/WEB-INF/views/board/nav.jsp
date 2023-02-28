@@ -2,15 +2,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style type="text/css">
 	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap');
-
+	@import url('https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap');
+	
 	.topMenu {
-	margin-top: -10px;
-	margin-left: -10px;
-	margin-right: -10px;
+	margin-top: -7px;
 	background-color:#F5F5F5; 
+	border-bottom: 1px solid #e5e5e5;
   	}
 	
-	.RightMenu { list-style: none; margin-left: 10px; display: flex;}
+	.RightMenu { list-style: none; margin-left: 100px; display: flex;}
 	.RightMenu a{color: #000; padding :10px; display:inline-block;}
 	.RightMenu a:hover {color: #666}
 	

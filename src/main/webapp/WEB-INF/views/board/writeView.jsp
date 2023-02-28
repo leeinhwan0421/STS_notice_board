@@ -27,9 +27,12 @@
 		
 		function fn_valiChk()
 		{
-			 if (!$('#title').val() || !$('#content').val()) 
-			 {
-				alert('제목과 내용을 모두 입력해주세요.');
+			var title = $('#title').val();
+			var content = $('#content').val();	
+			
+			if(content.trim() == "" || title.trim() == "")
+			{
+				alert("내용이나 제목에 공백만 입력하실 수 없습니다.");
 				return true;
 			}
 		}

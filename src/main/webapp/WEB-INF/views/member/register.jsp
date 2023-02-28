@@ -48,20 +48,28 @@
 		})
 		
 		function fn_idChk(){
-			$.ajax({
-				url : "/member/idChk",
-				type : "post",
-				dataType : "json",
-				data : {"userId" : $("#userId").val()},
-				success : function(data){
-					if(data == 1){
-						alert("중복된 아이디입니다.");
-					}else if(data == 0){
-						$("#idChk").attr("value", "Y");
-						alert("사용가능한 아이디입니다.");
+			var userID = $('#userId').val();
+			if (/\W/.test(userID)) { // 특수 문자가 포함된 경우
+			    alert('ID에는 특수 문자나 띄어쓰기를 사용할 수 없습니다.');
+			    return false;
+			}
+			else
+			{
+				$.ajax({
+					url : "/member/idChk",
+					type : "post",
+					dataType : "json",
+					data : {"userId" : $("#userId").val()},
+					success : function(data){
+						if(data == 1){
+							alert("중복된 아이디입니다.");
+						}else if(data == 0){
+							$("#idChk").attr("value", "Y");
+							alert("사용가능한 아이디입니다.");
+						}
 					}
-				}
-			})
+				})
+			}
 		}
 	</script>
 	<style>
@@ -169,8 +177,8 @@
 	<body>
 	<div class="box">
 		<section id="container">
-			<div class="view_table">
-				<form action="/member/register" method="post" id="regForm">
+			<form action="/member/register" method="post" id="regForm">
+				<div class="view_table">
 						<p class="mainText">회원가입</p>
 						
 						<p class="spaceMaker"></p>
@@ -180,13 +188,13 @@
 						<button class="idChk" type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button>
 						<p> <input type="password" id="userPass" name="userPass" placeholder="Password" /> </p>
 						<p> <input type="text" id="userName" name="userName" placeholder="Your Name" /> </p>
-				</form>
 				
-					<p class="spaceMaker"></p>	
-				
-					<button class="register_btn" type="button" id="submit">회원가입</button>
-					<button class="cancle_btn" type="button">취소</button>
+						<p class="spaceMaker"></p>	
+					
+						<button class="register_btn" type="button" id="submit">회원가입</button>
+						<button class="cancle_btn" type="button">취소</button>
 				</div>
+				</form>
 			</section>
 		</div>
 	</body>
