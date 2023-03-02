@@ -94,10 +94,14 @@
 	}
 	
 	.search_table {
-  	display: flex;
-  	justify-content: center;
-  	align-items: center;
-  	padding-top: 30px;
+  		display: flex;
+  		justify-content: center;
+  		align-items: center;
+  		padding-top: 30px;
+	}
+	
+	.spaceMaker{
+		height: 30px;
 	}
 	
 	.input-group {
@@ -162,7 +166,7 @@
 			
 			<div id="banner">
 				<div class="banner-Image">
-					<img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F3f92e3db-49c0-41f1-8417-b655111a1de6%2F%25EC%2595%2588%25EB%2585%2595%25ED%2595%2598%25EC%2584%25B8%25EC%259A%2594_%25EC%2598%25A4%25EB%258A%2598%25EB%258F%2584_%25EC%25A6%2590%25EA%25B1%25B0%25EC%259A%25B4_%25ED%2595%2598%25EB%25A3%25A8_%25EB%25B3%25B4%25EB%2582%25B4%25EC%2584%25B8%25EC%259A%2594.png?table=block&id=5debbf5f-ca18-4f89-b2de-1cb8b5b0e41c&spaceId=2b7cc640-ccde-444e-b34a-e4adcd1367c6&width=1900&userId=916f94dc-5593-4f96-af20-76df5f60b522&cache=v2" width="1300" height="500">
+					<img src="/resources/img/banner.png" width="1300" height="500">
 				</div>
 				
 				<div class="buttonGroupContainer">
@@ -197,12 +201,12 @@
 										<span class="replyCount"> [${controller.getReplyCount(list.bno)}] </span>
 									</c:if>
 									<c:if test = "${controller.getHasFile(list) == true}">
-										<img class="file_Image" src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F18c17374-7195-44c7-9817-5a244c460326%2F4856668.png?table=block&id=5c837d47-7778-4ff4-ba2f-543b5dea6018&spaceId=2b7cc640-ccde-444e-b34a-e4adcd1367c6&width=2000&userId=916f94dc-5593-4f96-af20-76df5f60b522&cache=v2" width="24" height="24">
+										<img class="file_Image" src="/resources/img/fileImg.png" width="24" height="24">
 									</c:if>
 								</td>
 								<td>
 									<c:out value="${list.writer}" />
-									<c:if test= "${controller.getWriterRole(list.writer) == 'MANAGER'}">
+									<c:if test= "${controller.getWriterRole(list.writer) == 'MANAGER' or controller.getWriterRole(list.writer) == 'MASTER'}">
 										<span class="role_Text">[관리자]</span>
 									</c:if>
 								</td>
@@ -212,6 +216,7 @@
 						</c:forEach>
 						
 					</table>
+					<div class="spaceMaker"></div>
 					<div class="search_table">
 							<select name="searchType" class="type_selecter">
 								<option value="t"<c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>제목</option>
@@ -223,7 +228,7 @@
 							<div class="input-group">
 								<input type="text" name="keyword" id="keywordInput" value="${scri.keyword}" class="search_input"/>
 								<button id="searchBtn" type="button" class="search_button">검색</button> 	
-					</div>
+						</div>
 					</div>
 						<ul class="pagination">
 							<c:if test="${pageMaker.prev}">

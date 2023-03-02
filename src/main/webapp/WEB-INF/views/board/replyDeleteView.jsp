@@ -85,7 +85,7 @@
 			
 			<div id="banner">
 				<div class="banner-Image">
-					<img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F3f92e3db-49c0-41f1-8417-b655111a1de6%2F%25EC%2595%2588%25EB%2585%2595%25ED%2595%2598%25EC%2584%25B8%25EC%259A%2594_%25EC%2598%25A4%25EB%258A%2598%25EB%258F%2584_%25EC%25A6%2590%25EA%25B1%25B0%25EC%259A%25B4_%25ED%2595%2598%25EB%25A3%25A8_%25EB%25B3%25B4%25EB%2582%25B4%25EC%2584%25B8%25EC%259A%2594.png?table=block&id=5debbf5f-ca18-4f89-b2de-1cb8b5b0e41c&spaceId=2b7cc640-ccde-444e-b34a-e4adcd1367c6&width=1900&userId=916f94dc-5593-4f96-af20-76df5f60b522&cache=v2" width="1300" height="500">
+					<img src="/resources/img/banner.png" width="1300" height="500">
 				</div>
 			</div>
 				<section id="container">
@@ -101,19 +101,29 @@
 						<div class="border"></div>
 						
 						<div>
-							<c:if test="${member.userId != replyDelete.writer}">
-								<p>댓글 작성 유저와 정보가 일치 하지 않습니다.</p>
-								<p>다음 코멘트는 로그인이 되지 않았거나, 글 작성 유저와 정보가 일치 하지 않는 게정으로 접속하였을 경우</p>
-								<p>발생할 수 있습니다.</p>
-							</c:if>
-							<c:if test="${member.userId == replyDelete.writer}">
-								<p>댓글을 삭제 하시겠습니까?</p>
-								<button type="submit" class="delete_btn">예 삭제합니다.</button>
-								<button type="button" class="cancel_btn">아니오. 삭제하지 않습니다.</button>
-							</c:if>
+							<c:choose>
+								<c:when test="${member.userId == replyDelete.writer}">
+									<p>댓글을 삭제 하시겠습니까?</p>
+									<button type="submit" class="delete_btn">예 삭제합니다.</button>
+									<button type="button" class="cancel_btn">아니오. 삭제하지 않습니다.</button>
+								</c:when>
+								<c:when test="${member.role == 'MANAGER' or member.role == 'MASTER'}">
+									<p>댓글을 삭제 하시겠습니까?</p>
+									<button type="submit" class="delete_btn">예 삭제합니다.</button>
+									<button type="button" class="cancel_btn">아니오. 삭제하지 않습니다.</button>
+								</c:when>
+								<c:otherwise>
+									<p>댓글 작성 유저와 정보가 일치 하지 않습니다.</p>
+									<p>다음 코멘트는 로그인이 되지 않았거나, 매니저 권한이 없는 유저거나, 글 작성 유저와 정보가 일치 하지 않는 게정으로 접속하였을 경우</p>
+									<p>발생할 수 있습니다.</p>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</form>
 				</section>
+			</div>
+		<div>
+			<%@include file="footer.jsp" %>
 		</div>
 	</body>
 </html>

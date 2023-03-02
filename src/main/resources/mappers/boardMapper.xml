@@ -54,6 +54,9 @@
 		<if test="sort == null">
 			ORDER BY BNO DESC
 		</if>
+		<if test="sort == ''">
+			ORDER BY BNO DESC
+		</if>
 		<if test="sort == 'bno'">
 			ORDER BY BNO DESC
 		</if>

@@ -101,7 +101,7 @@
 		
 		.box {
 	  		width: 1000px;
-		  	height: 600px;
+		  	min-height: 600px;
 		  	background-color: #FFF;
 		  	border-radius: 20px;
 		  	position: absolute;
@@ -112,7 +112,7 @@
 		
 		#container {
 			width: 800px;
-			height: 540px;
+			min-height: 540px;
 	  		display: flex;
 	  		justify-content: center;
 	  		align-items: center;
@@ -188,7 +188,7 @@
 		<div class="box">
 			<section id="container">
 				<c:choose>
-					<c:when test="${member == null and member.role != 'MANAGER'}">
+					<c:when test="${member == null or member.role == 'USER'}">
 						<p>잘못된 접근입니다.</p>
 					</c:when>
 					<c:otherwise>
@@ -203,27 +203,34 @@
 									<th class ="regdate_wrap">가입일</th>
 									<th class ="option_wrap">설정</th>
 								</tr>
-								<c:forEach items="${list}" var="member">
+								<c:forEach items="${list}" var="list">
 								    <tr>
-								        <td>${member.userId}</td>
-								        <td>${member.userName}</td>
-								        <td>${member.role}</td>
-								        <td><fmt:formatDate value="${member.regDate}" pattern="yyyy-MM-dd"/></td>
+								        <td>${list.userId}</td>
+								        <td>${list.userName}</td>
+								        <td>${list.role}</td>
+								        <td><fmt:formatDate value="${list.regDate}" pattern="yyyy-MM-dd"/></td>
 								        <td>
-								            <c:if test="${member.role == 'USER'}">
-								                <form action="/member/memberDelete" method="post" class="delete-form">
-								                    <input type="hidden" name="userId" value="${member.userId}" />
-								                    <button type="submit" class="delete_Btn">탈퇴</button>
-								                </form>
-								                <form action="/member/memberUpgrade" method="post" class="upgrade-form">
-								                    <input type="hidden" name="userId" value="${member.userId}" />
-								                    <input type="hidden" name="role" value="MANAGER" />
-								                    <button type="submit" class="upgrade_Btn">승급</button>
-								                </form>
-								            </c:if>
-								            <c:if test="${member.role == 'MANAGER'}">
-								                <p>Manager</p>
-								            </c:if>
+								        		<c:if test="${member.role == 'MANAGER' or member.role == 'MASTER'}">
+								        			<c:if test = "${list.role == 'USER'}">
+								        				<form action="/member/memberDelete" method="post" class="delete-form">
+									                    	<input type="hidden" name="userId" value="${list.userId}" />
+									                    	<button type="submit" class="delete_Btn">탈퇴</button>
+									                	</form>
+									                	<form action="/member/memberUpgrade" method="post" class="upgrade-form">
+								                    		<input type="hidden" name="userId" value="${member.userId}" />
+								                    		<input type="hidden" name="role" value="MANAGER" />
+								                    		<button type="submit" class="upgrade_Btn">승급</button>
+								               		 	</form>
+								        			</c:if>
+								        		</c:if>
+								        		<c:if test = "${member.role == 'MASTER'}">
+								        			<c:if test = "${list.role == 'MANAGER'}">
+								        				<form action="/member/memberDelete" method="post" class="delete-form">
+									                    	<input type="hidden" name="userId" value="${list.userId}" />
+									                    	<button type="submit" class="delete_Btn">탈퇴</button>
+									                	</form>
+								        			</c:if>
+									            </c:if>
 								        </td>
 								    </tr>
 								</c:forEach>

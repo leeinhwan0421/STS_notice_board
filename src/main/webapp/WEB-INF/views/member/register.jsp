@@ -17,7 +17,7 @@
 				$("#idChk").attr("value", "N");
 	    	})
 			
-			$("#submit").on("click", function(){
+			$(".register_btn").on("click", function(){
 				if($("#userId").val()==""){
 					alert("아이디를 입력해주세요.");
 					$("#userId").focus();
@@ -42,6 +42,7 @@
 				if(idChkVal == "N"){
 					alert("중복확인 버튼을 눌러주세요.");
 				}else if(idChkVal == "Y"){
+					alert("회원가입이 완료되었습니다.");
 					$("#regForm").submit();
 				}
 			});
@@ -177,8 +178,8 @@
 	<body>
 	<div class="box">
 		<section id="container">
-			<form action="/member/register" method="post" id="regForm">
 				<div class="view_table">
+				<form action="/member/register" method="post" id="regForm">
 						<p class="mainText">회원가입</p>
 						
 						<p class="spaceMaker"></p>
@@ -188,13 +189,12 @@
 						<button class="idChk" type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button>
 						<p> <input type="password" id="userPass" name="userPass" placeholder="Password" /> </p>
 						<p> <input type="text" id="userName" name="userName" placeholder="Your Name" /> </p>
-				
+				</form>
 						<p class="spaceMaker"></p>	
 					
 						<button class="register_btn" type="button" id="submit">회원가입</button>
 						<button class="cancle_btn" type="button">취소</button>
-				</div>
-				</form>
+					</div>
 			</section>
 		</div>
 	</body>

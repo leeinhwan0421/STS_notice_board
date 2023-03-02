@@ -138,18 +138,18 @@
 				
 				location.href = "/board/list?page=${scri.page}"
 						      +"&perPageNum=${scri.perPageNum}"
-						      +"&searchType=${scri.searchType}&keyword=${scri.keyword}";
+						      +"&searchType=${scri.searchType}&keyword=${scri.keyword}"
+						      + "&sort=${scri.sort}";
 			})
 			
 			$(".replyWriteBtn").on("click", function(){
-				var content = $('#content').val();
-				
-				if(content.trim() == "");
-				{
-					alert("공백만 입력하실 수 없습니다.");
-					return false;
+				const replyContent = document.getElementsByClassName('replyContent')[0].value.trim();
+
+				if (replyContent === '') {
+				    alert('댓글 내용을 입력해주세요.');
+				    return false;
 				}
-				
+			
 			    var formObj = $("form[name='replyForm']");
 			    formObj.attr("action", "/board/replyWrite");
 			    formObj.submit();
@@ -162,6 +162,7 @@
 								+ "&perPageNum=${scri.perPageNum}"
 								+ "&searchType=${scri.searchType}"
 								+ "&keyword=${scri.keyword}"
+								+ "&sort=${scri.sort}"
 								+ "&rno="+$(this).attr("data-rno");
 			});
 			
@@ -172,6 +173,7 @@
 					+ "&perPageNum=${scri.perPageNum}"
 					+ "&searchType=${scri.searchType}"
 					+ "&keyword=${scri.keyword}"
+					+ "&sort=${scri.sort}"
 					+ "&rno="+$(this).attr("data-rno");
 			});
 		})
@@ -192,7 +194,7 @@
 			
 			<div id="banner">
 				<div class="banner-Image">
-					<img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F3f92e3db-49c0-41f1-8417-b655111a1de6%2F%25EC%2595%2588%25EB%2585%2595%25ED%2595%2598%25EC%2584%25B8%25EC%259A%2594_%25EC%2598%25A4%25EB%258A%2598%25EB%258F%2584_%25EC%25A6%2590%25EA%25B1%25B0%25EC%259A%25B4_%25ED%2595%2598%25EB%25A3%25A8_%25EB%25B3%25B4%25EB%2582%25B4%25EC%2584%25B8%25EC%259A%2594.png?table=block&id=5debbf5f-ca18-4f89-b2de-1cb8b5b0e41c&spaceId=2b7cc640-ccde-444e-b34a-e4adcd1367c6&width=1900&userId=916f94dc-5593-4f96-af20-76df5f60b522&cache=v2" width="1300" height="500">
+					<img src="/resources/img/banner.png" width="1300" height="500">
 				</div>
 			</div>
 			
@@ -203,6 +205,7 @@
 					<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
 					<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
 					<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
+					<input type="hidden" id="sort" name="sort" value="${scri.sort}"> 
 					<input type="hidden" id="FILE_NO" name="FILE_NO" value=""> 
 				</form>
 				
@@ -214,14 +217,11 @@
 					
 					<div class="buttongroup">
 						<c:choose>
-							<c:when test="${member.userId != read.writer and member.role != 'MANAGER'}">
-								<!-- NONE -->
-							</c:when>
 							<c:when test="${member.userId == read.writer}">
 								<button type="button" class="update_btn">수정</button>
 								<button type="button" class="delete_btn">삭제</button>
 							</c:when>
-							<c:when test="${member.role == 'MANAGER'}">
+							<c:when test="${member.role == 'MANAGER' or member.role == 'MASTER'}">
 								<button type="button" class="delete_btn">삭제</button>
 							</c:when>
 						</c:choose>
@@ -246,13 +246,14 @@
 						<input type="hidden" id="page" name="page" value="${scri.page}"> 
 						<input type="hidden" id="perPageNum" name="perPageNum" value="${scri.perPageNum}"> 
 						<input type="hidden" id="searchType" name="searchType" value="${scri.searchType}"> 
-						<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}"> 
+						<input type="hidden" id="keyword" name="keyword" value="${scri.keyword}">
+						<input type="hidden" id="sort" name="sort" value="${scri.keyword}">
 				
 					<c:if test="${member.userId != null}">
 						<input type="hidden" id="writer" name="writer" class="reply_writer" value="${member.userId}" readonly/>
 					
 						<label for="content">댓글 내용</label>
-						<textarea id="content" name="content"></textarea>
+						<textarea id="content" name="content" class="replyContent"></textarea>
 					
 						<button type="button" class="replyWriteBtn">작성</button>
 					</c:if>
@@ -276,15 +277,12 @@
 									<span style="font-size: 12px; color: gray"><fmt:formatDate value="${replyList.regdate}" pattern="yyyy-MM-dd" /></span>
 									<div>
 										<c:choose>
-											<c:when test="${member.userId != replyList.writer and member.role != 'MANAGER'}">
-												<!-- NONE -->
-											</c:when>
 											<c:when test="${member.userId == replyList.writer}">
 												<button type="button" class="replyUpdateBtn" data-rno="${replyList.rno}">수정</button>
 												<button type="button" class="replyDeleteBtn" data-rno="${replyList.rno}">삭제</button>
 											</c:when>
-											<c:when test="${member.role == 'MANAGER'}">
-												<button type="button" class="replyUpdateBtn">삭제</button>
+											<c:when test="${member.role == 'MANAGER' or member.role == 'MASTER'}">
+												<button type="button" class="replyDeleteBtn" data-rno="${replyList.rno}">삭제</button>
 											</c:when>
 										</c:choose>
 									</div>
@@ -294,7 +292,9 @@
 					</div>
 				</div>
 			</section>
-			<hr />
+		</div>
+		<div>
+			<%@include file="footer.jsp" %>
 		</div>
 	</body>
 </html>

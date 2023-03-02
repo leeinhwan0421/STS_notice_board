@@ -11,8 +11,11 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#login_Btn").on("click", function(){
-		    if (id.value.trim() == '' || pass.value.trim() == '')
-		    {
+	    	var id = document.getElementById("userId").value;
+	        var pass = document.getElementById("userPass").value;
+	        
+		    if (id.trim() == '' || pass.trim() == '')
+		    {   
 		    	alert("아이디 또는 패스워드가 입력되지 않았습니다");
 		    	return false;
 		    }

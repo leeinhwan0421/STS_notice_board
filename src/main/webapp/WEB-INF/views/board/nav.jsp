@@ -31,7 +31,7 @@
 		<c:if test="${member != null}">
 			<a href="/member/logout">로그아웃</a>
 			<a href="/member/memberUpdateView">${member.userId}</a>
-			<c:if test="${member.role == 'MANAGER'}"><a href="/member/memberManagementView">멤버 관리</a></c:if>
+			<c:if test="${member.role != 'USER'}"><a href="/member/memberManagementView">멤버 관리</a></c:if>
 		</c:if>
 		<c:if test="${member == null}"><a href="/">로그인</a></c:if>
 </ul>
