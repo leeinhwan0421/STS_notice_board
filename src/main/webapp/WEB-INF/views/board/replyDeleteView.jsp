@@ -80,7 +80,7 @@
 	
 		<div id="root">
 			<div>
-				<%@include file="nav.jsp" %>
+				<%@include file="/resources/Include/nav.jsp" %>
 			</div>
 			
 			<div id="banner">
@@ -123,7 +123,7 @@
 				</section>
 			</div>
 		<div>
-			<%@include file="footer.jsp" %>
+			<%@include file="/resources/Include/footer.jsp" %>
 		</div>
 	</body>
 </html>

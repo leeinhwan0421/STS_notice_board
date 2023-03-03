@@ -15,6 +15,12 @@
 		$(document).ready(function(){
 			var formObj = $("form[name='writeForm']");
 			$(".write_btn").on("click", function(){
+				var title = $.trim($('#title').val());
+				var content = $.trim($('#content').val());
+
+				$('#title').val(title);
+				$('#content').val(content);
+				
 				if(fn_valiChk()){
 					return false;
 				}
@@ -130,7 +136,7 @@
 	<body>
 		<div id="root">
 			<div>
-				<%@include file="nav.jsp" %>
+				<%@include file="/resources/Include/nav.jsp" %>
 			</div>
 			
 			<div id="banner">
@@ -184,7 +190,7 @@
 			</section>
 		</div>
 		<div>
-			<%@include file="footer.jsp" %>
+			<%@include file="/resources/Include/footer.jsp" %>
 		</div>
 	</body>
 </html>

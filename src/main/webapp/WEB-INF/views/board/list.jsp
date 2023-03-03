@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	 
+		<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 	 	<title>한쓰째즈LP까폐</title>
 	</head>
 	<style>
@@ -26,13 +26,6 @@
   	}
   	thead{
   		font-weight: 800;
-  	}
-  	
-  	.banner-Image{
-  		position: relative;
-  		width: 1300px;
-  		height: 500px;
-  		margin: auto;
   	}
   	
   	.buttonGroupContainer {
@@ -157,24 +150,18 @@
 		});
 	</script>
 	<body>
-		<div class="container">
-
-			 
+		<%@include file="/resources/Include/style.jsp" %>
+		<div class="container"> 
 			<div>
-				<%@include file="nav.jsp" %>
+				<%@include file="/resources/Include/nav.jsp" %>
+				<%@include file="/resources/Include/banner.jsp" %>
 			</div>
-			
-			<div id="banner">
-				<div class="banner-Image">
-					<img src="/resources/img/banner.png" width="1300" height="500">
-				</div>
 				
-				<div class="buttonGroupContainer">
-  					<div class="buttonGroup">
-    					<button type="button" class="viewCountSort_Btn">조회순</button>
-    					<button type="button" class="bnoSort_Btn">최신순</button>
-  					</div>
-				</div>
+			<div class="buttonGroupContainer">
+  				<div class="buttonGroup">
+    				<button type="button" class="viewCountSort_Btn">조회순</button>
+    				<button type="button" class="bnoSort_Btn">최신순</button>
+  				</div>
 			</div>
 			
 			<section id="container" class="table_parent">
@@ -248,7 +235,7 @@
 			</section>
 			
 			<div>
-				<%@include file="footer.jsp" %>
+				<%@include file="/resources/Include/footer.jsp" %>
 			</div>
 		</div>
 	</body>

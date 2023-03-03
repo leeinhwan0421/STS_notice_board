@@ -114,6 +114,17 @@
 		$(document).ready(function(){
 			var formObj = $("form[name='readForm']");
 			
+			$.ajax({
+				url: "/board/viewCountUp",
+			    type: "POST",
+			    data: {
+			    bno: ${read.bno}
+			    },
+			    success: function() {
+			      console.log("조회수 증가 완료");
+			    }
+			})
+			
 			// 수정 
 			$(".update_btn").on("click", function(){
 				formObj.attr("action", "/board/updateView");
@@ -189,7 +200,7 @@
 		<div class="container">
 			 
 			<div>
-				<%@include file="nav.jsp" %>
+				<%@include file="/resources/Include/nav.jsp" %>
 			</div>
 			
 			<div id="banner">
@@ -294,7 +305,7 @@
 			</section>
 		</div>
 		<div>
-			<%@include file="footer.jsp" %>
+			<%@include file="/resources/Include/footer.jsp" %>
 		</div>
 	</body>
 </html>

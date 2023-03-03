@@ -49,7 +49,7 @@
 	<body>
 		<div id="root">
 			<div>
-				<%@include file="../board/nav.jsp" %>
+				<%@include file="/resources/Include/nav.jsp" %>
 			</div>
 		</div>
 		

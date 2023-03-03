@@ -6,7 +6,7 @@
 <head>
 	<title>Login</title>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
- 
+ 	<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 </head>
 <script type="text/javascript">
 	$(document).ready(function(){

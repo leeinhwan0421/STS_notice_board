@@ -48,7 +48,17 @@
 		})
 			
 		function fn_valiChk(){
+			var title = $('#title').val();
+			var content = $('#content').val();	
+			
+			if(content.trim() == "" || title.trim() == "")
+			{
+				alert("내용이나 제목에 공백만 입력하실 수 없습니다.");
+				return true;
+			}
+			
 			var updateForm = $("form[name='updateForm'] .chk").length;
+			
 			for(var i = 0; i<updateForm; i++){
 				if($(".chk").eq(i).val() == "" || $(".chk").eq(i).val() == null){
 					alert($(".chk").eq(i).attr("title"));
@@ -151,7 +161,7 @@
 	
 		<div id="root"> 
 			<div>
-				<%@include file="nav.jsp" %>
+				<%@include file="/resources/Include/nav.jsp" %>
 			</div>
 			
 			<div id="banner">
@@ -216,7 +226,7 @@
 			</section>
 		</div>
 		<div>
-			<%@include file="footer.jsp" %>
+			<%@include file="/resources/Include/footer.jsp" %>
 		</div>
 	</body>
 </html>

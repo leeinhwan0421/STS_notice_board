@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -101,6 +103,39 @@ public class BoardController {
 		List<Map<String, Object>> fileList = service.selectFileList(boardVO.getBno());
 		model.addAttribute("file", fileList);
 		return "board/readView";
+	}
+	
+	/**
+	조회수 중복 방지
+	**/
+	@RequestMapping(value = "/viewCountUp", method = RequestMethod.POST)
+	private void viewCountUp(int bno, HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+	    Cookie oldCookie = null;
+	    Cookie[] cookies = request.getCookies();
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if (cookie.getName().equals("postView")) {
+	                oldCookie = cookie;
+	            }
+	        }
+	    }
+
+	    if (oldCookie != null) {
+	        if (!oldCookie.getValue().contains("[" + bno + "]")) {
+	        	service.boardHit(bno);
+	            oldCookie.setValue(oldCookie.getValue() + "_[" + bno + "]");
+	            oldCookie.setPath("/");
+	            oldCookie.setMaxAge(60 * 60 * 24);
+	            response.addCookie(oldCookie);
+	        }
+	    } else {
+	    	service.boardHit(bno);
+	        Cookie newCookie = new Cookie("postView","[" + bno + "]");
+	        newCookie.setPath("/");
+	        newCookie.setMaxAge(60 * 60 * 24);
+	        response.addCookie(newCookie);
+	    }
 	}
 	
 	// 게시판 수정뷰
