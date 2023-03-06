@@ -47,12 +47,7 @@
 		}
 	</style>
 	<body>
-		<div id="root">
-			<div>
-				<%@include file="/resources/Include/nav.jsp" %>
-			</div>
-		</div>
-		
+		<%@include file="/resources/Include/style.jsp" %>
 		<div class="box">
 			<div class="container">
 				<div class ="textGroup">

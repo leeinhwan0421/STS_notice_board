@@ -174,6 +174,7 @@
 		  	border-radius: 20px;
 		  	
 		  	margin-top: 10px;
+		  	margin-bottom: 10px;
 		}
 		
 		.upgrade_Btn, .delete_Btn{
@@ -185,6 +186,7 @@
 		}
 	</style>
 	<body>
+		<%@include file="/resources/Include/style.jsp" %>
 		<div class="box">
 			<section id="container">
 				<c:choose>

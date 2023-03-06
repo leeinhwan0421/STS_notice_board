@@ -8,6 +8,8 @@
 		
 		margin: 0px;
 		padding: 0px;
+		
+		margin-top: 60px;
 	}
 
 	.gray_wrap {

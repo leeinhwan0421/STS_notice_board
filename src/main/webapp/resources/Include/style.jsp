@@ -12,4 +12,14 @@
 	body::-webkit-scrollbar {
   		display: none;
 	}
+	
+	button, a, select, option{
+		cursor: pointer;
+	}
+	
+	input[type=file]::file-selector-button {
+		cursor: pointer;
+	}
+	
+	
 </style>

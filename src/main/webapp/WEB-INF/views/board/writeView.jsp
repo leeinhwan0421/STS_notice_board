@@ -55,7 +55,7 @@
 		}
 	</script>
 	<style>
-		label, input, textarea, p{
+		.view_table label, .view_table input, .view_table textarea, .view_table p{
 			width: 1000px;
 			margin: auto;
   			display: block;
@@ -72,12 +72,6 @@
 			font-size: 25px;
 			font-weight: 900;
 		}
-		
-		.banner-Image{
-  			width: 1300px;
-  			height: 500px;
-  			margin: auto;
-  		}
 		
 		#container {
 			width: 1300px;
@@ -134,15 +128,11 @@
 		}
 	</style>
 	<body>
+		<%@include file="/resources/Include/style.jsp" %>
 		<div id="root">
 			<div>
 				<%@include file="/resources/Include/nav.jsp" %>
-			</div>
-			
-			<div id="banner">
-				<div class="banner-Image">
-					<img src="/resources/img/banner.png" width="1300" height="500">
-				</div>
+				<%@include file="/resources/Include/banner.jsp" %>
 			</div>
 			
 			<section id="container">

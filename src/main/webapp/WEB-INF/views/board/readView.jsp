@@ -8,9 +8,7 @@
 	 	<title>${read.title}</title>
 	</head>
 	<style>
-		a, td, th, table, li, a{font-family: 'Noto Sans KR', sans-serif;}
-		
-		label, input, textarea, p, span{
+		.view_table label, .view_table input, .view_table textarea, .view_table p, .view_table span {
 			width: 1000px;
 			margin: auto;
 			margin-top: 10px;
@@ -29,12 +27,6 @@
 			font-size: 25px;
 			font-weight: 900;
 		}
-		
-		.banner-Image{
-  			width: 1300px;
-  			height: 500px;
-  			margin: auto;
-  		}
   		
   		#container {
 			width: 1300px;
@@ -100,6 +92,15 @@
 		  	font-size: 15px;
 		  	background-color: #F5F5F5;
 		  	border-color: #ddd;
+		}
+		
+		.file a:link  { text-decoration: none; }
+	
+		.file a:hover { text-decoration: underline; }
+	
+		.file a{
+	  	background-color: #FFFFFF;
+	  	color: #494949;
 		}
 		
 	</style>
@@ -197,16 +198,11 @@
 	</script>
 	
 	<body>
+		<%@include file="/resources/Include/style.jsp" %>
 		<div class="container">
-			 
 			<div>
 				<%@include file="/resources/Include/nav.jsp" %>
-			</div>
-			
-			<div id="banner">
-				<div class="banner-Image">
-					<img src="/resources/img/banner.png" width="1300" height="500">
-				</div>
+				<%@include file="/resources/Include/banner.jsp" %>
 			</div>
 			
 			<section id="container">
@@ -244,7 +240,7 @@
 					<span>첨부 파일</span>
 					<div class="attachment">
 						<c:forEach var="file" items="${file}">
-							<a href="#" onclick="fn_fileDown('${file.FILE_NO}'); return false;">${file.ORG_FILE_NAME}</a>(${file.FILE_SIZE}kb)<br>
+							<a class="file" href="#" onclick="fn_fileDown('${file.FILE_NO}'); return false;">${file.ORG_FILE_NAME}</a>(${file.FILE_SIZE}kb)<br>
 						</c:forEach>
 					</div>
 					

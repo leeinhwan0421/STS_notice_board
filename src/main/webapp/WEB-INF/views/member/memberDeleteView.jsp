@@ -125,6 +125,7 @@
 		}
 	</style>
 	<body>
+		<%@include file="/resources/Include/style.jsp" %>
 		<div class="box">
 			<section id="container">
 				<c:if test="${member == null}">

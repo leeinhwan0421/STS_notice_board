@@ -177,6 +177,7 @@
 	</style>
 	<body>
 	<div class="box">
+		<%@include file="/resources/Include/style.jsp" %>
 		<section id="container">
 				<div class="view_table">
 				<form action="/member/register" method="post" id="regForm">

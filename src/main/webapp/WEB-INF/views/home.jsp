@@ -131,6 +131,7 @@
  	
 </style>
 <body>
+	<%@include file="/resources/Include/style.jsp" %>
 	<form name='homeForm' method="post" action="/member/login">
 		<div class="box">
 			<div id="container">

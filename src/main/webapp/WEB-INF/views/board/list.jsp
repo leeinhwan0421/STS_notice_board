@@ -10,29 +10,81 @@
 	<style>
 	a, td, th, table, li, a, button {font-family: 'Noto Sans KR', sans-serif;}
 	
+	.buttonGroup{
+		display: flex;
+	  	justify-content: flex-start;
+	  	margin-left: 310px;
+	  	margin-bottom: -55px;
+	  	padding-top: 30px;
+	}
+	
+	.search_table {
+	  	display: flex;
+	  	justify-content: flex-end;
+	  	margin-right: 310px;
+	  	padding-top: 30px;
+	}
+	
+	.search_select, .search_input, .search_Btn {		
+		margin-left: 5px;
+		padding: 2px;
+		
+		height: 25px;
+	
+		border: 1px solid #C2C2C2;
+		color: #494949;
+	}
+	
+	.search_select {
+		width: 100px;
+	}
+	
+	.search_input {
+		width: 200px;
+	}
+	
+	.search_Btn {
+		width: 60px;
+		
+		background-color: #5E5E5E;
+		color: #FFFFFF;
+	}
+	
   	table{
  		border-collapse: collapse;
  		width: 1300px;    
  		margin : auto;
- 		margin-top : 30px;
+ 		margin-top : 10px;
  		text-align: center;
   	}
-  	td, th{
-  		border-bottom: 1px solid #ddd;
+  	
+  	.table_header{
+		border-top: 2px solid #43434A;
+		border-bottom: 1px solid #757C86;
+		
+		color: #112736;
+		font-weight: 800;
+		font-size : 19px;
+	}
+	
+	.table_items {
+		border-bottom: 1px solid #DDE2E8;
+		color: #494949;
+	}
+	
+	.table_Btn {
+		text-decoration: none;
+		color: #494949;
+	}
+	
+	.table_Btn:hover{        
+		text-decoration: underline;
+	}
+	
+	
+  	table td, table th{
   		height: 50px;
   	}
-  	th{
-  		font-size : 19px;
-  	}
-  	thead{
-  		font-weight: 800;
-  	}
-  	
-  	.buttonGroupContainer {
-  		width: 1300px;
-  		margin: 20px auto 0;
-  		text-align: right;
-		}
 
 	.buttonGroup {
   		display: inline-block;
@@ -48,49 +100,25 @@
   		font-size: 15px;
 	}
 	
-	.bno_wrap{
-		width: 10%;
-	}
+	.bno_wrap     { width: 10%; }
 	
-	.name_wrap{
-		width: 45%;
-	}
+	.name_wrap    { width: 46%; }
 	
-	.writer_wrap{
-	 	width: 15%;
-	}
+	.writer_wrap  { width: 14%; }
 	
-	.regdate_wrap{
-		width: 20%;
-	}
+	.regdate_wrap { width: 14%; }
 	
-	.view_wrap{
-		width: 10%;
-	}
+	.view_wrap    { width: 8%; }
+	
+	.file_wrap    { width: 8%; }
 	
 	.replyCount, .role_Text{
-		color: red;
+		color: #E73444;
 		font-weight: 700;
 	}
 	
 	.file_Image{
 		margin-bottom: -6px;
-	}
-	
-	.pagination{
-	
-	}
-	
-	.pagination li{
-		list-style: none; 
-		display:inline-block;
-	}
-	
-	.search_table {
-  		display: flex;
-  		justify-content: center;
-  		align-items: center;
-  		padding-top: 30px;
 	}
 	
 	.spaceMaker{
@@ -101,21 +129,6 @@
   		display: flex;
   		align-items: center;
 	}
-
-	.search_table .type_selecter {
-  		width: 100px;
-  		height: 30px;
-	}
-
-	.search_table .search_input {
-  		width: 200px;
-  		height: 30px;
-	}
-
-	.search_table .search_button {
-  		width: 100px;
-  		height: 30px;
-	}
 	
 	.pagination {
   		display: flex;
@@ -123,17 +136,28 @@
   		align-items: center;
   		padding: 10px;
   		font-size: 17px;
-  		font-weight: bold;
+  		font-weight: 700;
 	}
 
 	.pagination li {
   		padding: 0 10px;
+
+		list-style: none; 
+		display:inline-block;
 	}
 
-	.pagination a {
-  		text-decoration: none;
-  		color: black;
+	.pagination a, .pagination a:link  { text-decoration: none; }
+	
+	.pagination a:hover { text-decoration: underline; }
+	
+	.otherPage a{
+	  	background-color: #FFFFFF;
+	  	color: #494949;
 	}
+	
+	.curPage { background-color: #E73444; }
+	
+	.curPage a{ color: #FFFFFF; }
 	
 	</style>
 	<script>
@@ -156,24 +180,36 @@
 				<%@include file="/resources/Include/nav.jsp" %>
 				<%@include file="/resources/Include/banner.jsp" %>
 			</div>
-				
-			<div class="buttonGroupContainer">
-  				<div class="buttonGroup">
-    				<button type="button" class="viewCountSort_Btn">조회순</button>
-    				<button type="button" class="bnoSort_Btn">최신순</button>
-  				</div>
+			
+			<div class="buttonGroup">
+    			<button type="button" class="viewCountSort_Btn">조회순</button>
+    			<button type="button" class="bnoSort_Btn">최신순</button>
+  			</div>
+			
+			<div class="search_table">
+				<select name="searchType" class="search_select">
+					<option value="t"<c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>제목</option>
+					<option value="c"<c:out value="${scri.searchType eq 'c' ? 'selected' : ''}"/>>내용</option>
+					<option value="w"<c:out value="${scri.searchType eq 'w' ? 'selected' : ''}"/>>작성자</option>
+					<option value="tc"<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option>
+				</select>	 
+				<div class="input-group">
+					<input type="text" name="keyword" id="keywordInput" value="${scri.keyword}" class="search_input"/>
+					<button id="searchBtn" type="button" class="search_Btn">검색</button> 	
+				</div>
 			</div>
 			
 			<section id="container" class="table_parent">
 				<form role="form" method="get">
 					<table class="table_list">
 						<thead>
-							<tr>
+							<tr class="table_header">
 								<th class="bno_wrap">번호</th>
 								<th class="name_wrap">제목</th>
 								<th class="writer_wrap">작성자</th>
 								<th class="regdate_wrap">등록일</th>
 								<th class="view_wrap">조회수</th>
+								<th class="file_wrap">파일</th>
 							</tr>
 						</thead>
 						
@@ -181,14 +217,11 @@
 							<tr class = "table_items">
 								<td><c:out value="${list.bno}" /></td>
 								<td>
-									<a href="/board/readView?bno=${list.bno}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}&sort=${scri.sort}">
+									<a class="table_Btn" href="/board/readView?bno=${list.bno}&page=${scri.page}&perPageNum=${scri.perPageNum}&searchType=${scri.searchType}&keyword=${scri.keyword}&sort=${scri.sort}">
 									<c:out value="${list.title}"/>
 									</a>
 									<c:if test="${controller.getReplyCount(list.bno) > 0}">
 										<span class="replyCount"> [${controller.getReplyCount(list.bno)}] </span>
-									</c:if>
-									<c:if test = "${controller.getHasFile(list) == true}">
-										<img class="file_Image" src="/resources/img/fileImg.png" width="24" height="24">
 									</c:if>
 								</td>
 								<td>
@@ -199,32 +232,25 @@
 								</td>
 								<td><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd"/></td>
 								<td><c:out value="${list.hit}" /></td>
+								<td>
+									<c:if test = "${controller.getHasFile(list) == true}">
+										<img class="file_Image" src="/resources/img/fileImg.png" width="24" height="24">
+									</c:if>
+								</td>
 							</tr>
 						</c:forEach>
 						
 					</table>
 					<div class="spaceMaker"></div>
-					<div class="search_table">
-							<select name="searchType" class="type_selecter">
-								<option value="t"<c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>제목</option>
-								<option value="c"<c:out value="${scri.searchType eq 'c' ? 'selected' : ''}"/>>내용</option>
-								<option value="w"<c:out value="${scri.searchType eq 'w' ? 'selected' : ''}"/>>작성자</option>
-								<option value="tc"<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option>
-							</select>
-						 
-							<div class="input-group">
-								<input type="text" name="keyword" id="keywordInput" value="${scri.keyword}" class="search_input"/>
-								<button id="searchBtn" type="button" class="search_button">검색</button> 	
-						</div>
-					</div>
 						<ul class="pagination">
 							<c:if test="${pageMaker.prev}">
 								<li><a href="list${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
 							</c:if> 
 							
 							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-								<li <c:out value="${pageMaker.cri.page == idx ? 'class=info' : ''}" />>
-								<a href="list${pageMaker.makeSearch(idx)}">${idx}</a></li>
+							    <li class="${pageMaker.cri.page == idx ? 'curPage' : 'otherPage'}">
+							        <a href="list${pageMaker.makeSearch(idx)}">${idx}</a>
+							    </li>
 							</c:forEach>
 							
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
